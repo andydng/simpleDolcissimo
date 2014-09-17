@@ -1,0 +1,108 @@
+/* General CSS changes*/	
+@font-face {
+    font-family: scriptFont;
+    src:url(../fonts/dancing-script.regular.ttf)
+}
+
+@font-face {
+    font-family: headings;
+    src:url(../fonts/Gotham-Light.otf)
+}
+
+@font-face {
+    font-family: bodyFont;
+    src:url(../fonts/open-sans.regular.ttf)
+}
+
+body{
+	font-family:bodyFont, Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1 img{
+	max-height:30px;
+	margin-top:-5px;
+	margin-bottom:-10px;
+}
+
+
+img{
+	max-width:100%;
+}
+
+#homeContent, #aboutContent, #productsContent, #servicesContent, #contactContent, #cakesContent, #cupcakesContent, #pastriesContent{
+	padding:0px;
+	margin:0px;
+}
+
+.margin-content{
+	margin:1em;
+}
+
+h2{
+	text-align:center;
+	color: #1cbbb4;
+	border-bottom: 2px solid #1cbbb4;
+	padding-bottom: 15px;
+	font-family: headings;
+}
+
+.quotemarks{
+	color: #1cbbb4;
+}
+
+.quote{
+	text-align:center;
+	font-size:2.3em;
+	font-family:scriptFont;
+	line-height:1;
+}
+
+h3{
+	font-family: headings;
+	text-align:center;
+	color: #ffffff;
+	background-color: #1cbbb4;
+	padding:10px;
+	margin:0px;
+}
+
+table{
+	margin-top:30px;
+	width:100%;
+}
+
+td{
+	padding-bottom: 20px;
+}
+
+#aboutContent p {
+	padding-bottom:15px;
+}
+
+.footer{
+	min-height:40px;
+	text-align:center;
+}
+
+.footer p{
+	margin:1em;
+	font-size:0.7em;
+}
+
+.socialMedia{
+	float:right;
+}
+
+#productList{
+	margin-top:1.5em;
+}
+
+.contactBold{
+	font-weight:bold;
+	text-transform: uppercase;
+	padding-right:20px;
+}
+
+.gallery{
+	text-align:center;
+}
