@@ -106,3 +106,12 @@ td{
 .gallery{
 	text-align:center;
 }
+
+/* Large screens */
+@media all and (min-width: 800px) {
+  #homeContent{
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+  }
+}
