@@ -9,46 +9,50 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
-    
-    <!--Photoswipe!-->
-    <link rel="stylesheet" href="photoswipe/photoswipe.css" />
-    <script src="photoswipe/klass.min.js"></script>
-    <script src="photoswipe/code.photoswipe.jquery-3.0.4.min.js"></script>
-    <script type="text/javascript">
-  
- (function(window, $, PhotoSwipe)
- {
-  $(document).ready(function()
-  {
-   $(".gallery a").photoSwipe(
-   {
-    enableMouseWheel: false,
-    enableKeyboard: false
-   });
-  });
- }(window, window.jQuery, window.Code.PhotoSwipe));
+  <!--Needed for internal mypanel-->
+  <script type="text/javascript">
+    $( document ).ready(function() {
+      $(function () {
+        $("[data-role=panel]").panel().enhanceWithin();
+      });
+    });
+  </script>
+  <!--Photoswipe!-->
+  <link rel="stylesheet" href="photoswipe/photoswipe.css" />
+  <script src="photoswipe/klass.min.js"></script>
+  <script src="photoswipe/code.photoswipe.jquery-3.0.4.min.js"></script>
+  <script type="text/javascript">
+    (function(window, $, PhotoSwipe)
+    {
+    $(document).ready(function()
+    {
+     $(".gallery a").photoSwipe(
+     {
+      enableMouseWheel: false,
+      enableKeyboard: false
+     });
+    });
+    }(window, window.jQuery, window.Code.PhotoSwipe));
 </script>
     
 </head>
 <body>
 
+  <div data-role="panel" id="mypanel" data-position="left" data-position-fixed="false" data-display="reveal" data-theme="a">  
+    <ul data-role="listview" class="nav-search">
+       <li>Menu</li>
+      <li><a href="#home" class="ui-btn">Home</a></li>
+      <li><a href="#about" class="ui-btn">About</a></li>
+      <li><a href="#products" class="ui-btn">Products</a></li>
+      <li><a href="#services" class="ui-btn">Services</a></li>
+      <li><a href="#contact" class="ui-btn">Contact</a></li>
+    </ul>   
+  </div> 
   <!--HOME PAGE-->
   <div data-role="page" data-theme="a" id="home">
-  
-    <div data-role="panel" id="myPanel1" data-position="left" data-position-fixed="false" data-display="reveal">  
-      <ul data-role="listview" class="nav-search">
-      	 <li>Menu</li>
-        <li><a href="#home" class="ui-btn">Home</a></li>
-        <li><a href="#about" class="ui-btn">About</a></li>
-        <li><a href="#products" class="ui-btn">Products</a></li>
-        <li><a href="#services" class="ui-btn">Services</a></li>
-        <li><a href="#contact" class="ui-btn">Contact</a></li>
-      </ul>   
-    </div> 
- 
     <div data-role="header" data-position="fixed" >
       <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
-      <a href="#myPanel1" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="homeContent">
@@ -73,21 +77,9 @@
 
   <!--ABOUT PAGE-->
   <div data-role="page" data-theme="a" id="about">
-  
-    <div data-role="panel" id="myPanel2" data-position="left" data-position-fixed="false" data-display="reveal">  
-      <ul data-role="listview" class="nav-search">
-      	 <li>Menu</li>
-        <li><a href="#home" class="ui-btn">Home</a></li>
-        <li><a href="#about" class="ui-btn">About</a></li>
-        <li><a href="#products" class="ui-btn">Products</a></li>
-        <li><a href="#services" class="ui-btn">Services</a></li>
-        <li><a href="#contact" class="ui-btn">Contact</a></li>
-      </ul>   
-    </div>  
-  
-    <div data-role="header" data-position="fixed">
+    <div data-role="header" data-position="fixed" >
       <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
-      <a href="#myPanel2" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="aboutContent">
@@ -110,21 +102,9 @@
 
   <!--PRODUCTS PAGE-->
   <div data-role="page" data-theme="a" id="products">
-  
-    <div data-role="panel" id="myPanel3" data-position="left" data-position-fixed="false" data-display="reveal">  
-      <ul data-role="listview" class="nav-search">
-      	 <li>Menu</li>
-        <li><a href="#home" class="ui-btn">Home</a></li>
-        <li><a href="#about" class="ui-btn">About</a></li>
-        <li><a href="#products" class="ui-btn">Products</a></li>
-        <li><a href="#services" class="ui-btn">Services</a></li>
-        <li><a href="#contact" class="ui-btn">Contact</a></li>
-      </ul>   
-    </div>  
-  
-    <div data-role="header" data-position="fixed">
+    <div data-role="header" data-position="fixed" >
       <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
-      <a href="#myPanel3" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="productsContent">
@@ -150,21 +130,9 @@
  
   <!--SERVICES PAGE-->
   <div data-role="page" data-theme="a" id="services">
-  
-    <div data-role="panel" id="myPanel4" data-position="left" data-position-fixed="false" data-display="reveal">  
-      <ul data-role="listview" class="nav-search">
-      	 <li>Menu</li>
-        <li><a href="#home" class="ui-btn">Home</a></li>
-        <li><a href="#about" class="ui-btn">About</a></li>
-        <li><a href="#products" class="ui-btn">Products</a></li>
-        <li><a href="#services" class="ui-btn">Services</a></li>
-        <li><a href="#contact" class="ui-btn">Contact</a></li>
-      </ul>   
-    </div> 
-  
-    <div data-role="header" data-position="fixed">
+    <div data-role="header" data-position="fixed" >
       <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
-      <a href="#myPanel4" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="servicesContent">
@@ -193,21 +161,9 @@
   
   <!--CONTACT PAGE-->
   <div data-role="page" data-theme="a" id="contact">
-  
-    <div data-role="panel" id="myPanel5" data-position="left" data-position-fixed="false" data-display="reveal">  
-      <ul data-role="listview" class="nav-search">
-      	 <li>Menu</li>
-        <li><a href="#home" class="ui-btn">Home</a></li>
-        <li><a href="#about" class="ui-btn">About</a></li>
-        <li><a href="#products" class="ui-btn">Products</a></li>
-        <li><a href="#services" class="ui-btn">Services</a></li>
-        <li><a href="#contact" class="ui-btn">Contact</a></li>
-      </ul>   
-    </div>  
-  
-    <div data-role="header" data-position="fixed">
+    <div data-role="header" data-position="fixed" >
       <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
-      <a href="#myPanel5" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="contactContent">
@@ -270,21 +226,9 @@
  
   <!--CAKES PAGE-->
   <div data-role="page" data-theme="a" id="cakes">
-  
-    <div data-role="panel" id="myPanel6" data-position="left" data-position-fixed="false" data-display="reveal">  
-      <ul data-role="listview" class="nav-search">
-      	 <li>Menu</li>
-        <li><a href="#home" class="ui-btn">Home</a></li>
-        <li><a href="#about" class="ui-btn">About</a></li>
-        <li><a href="#products" class="ui-btn">Products</a></li>
-        <li><a href="#services" class="ui-btn">Services</a></li>
-        <li><a href="#contact" class="ui-btn">Contact</a></li>
-      </ul>   
-    </div>  
-  
     <div data-role="header" data-position="fixed">
       <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
-      <a href="#myPanel6" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
       <a href="#" data-rel="back" data-theme="b" data-icon="back" data-iconpos="notext"></a>
     </div>
   
@@ -312,21 +256,9 @@
   
   <!--CUPCAKES PAGE-->
   <div data-role="page" data-theme="a" id="cupcakes">
-  
-    <div data-role="panel" id="myPanel7" data-position="left" data-position-fixed="false" data-display="reveal">  
-      <ul data-role="listview" class="nav-search">
-      	 <li>Menu</li>
-        <li><a href="#home" class="ui-btn">Home</a></li>
-        <li><a href="#about" class="ui-btn">About</a></li>
-        <li><a href="#products" class="ui-btn">Products</a></li>
-        <li><a href="#services" class="ui-btn">Services</a></li>
-        <li><a href="#contact" class="ui-btn">Contact</a></li>
-      </ul>   
-    </div> 
-  
     <div data-role="header" data-position="fixed">
       <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
-      <a href="#myPanel7" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
       <a href="#" data-rel="back" data-theme="b" data-icon="back" data-iconpos="notext"></a>
     </div>
   
@@ -354,21 +286,9 @@
     
   <!--PASTRIES PAGE-->
   <div data-role="page" data-theme="a" id="pastries">
-  
-    <div data-role="panel" id="myPanel8" data-position="left" data-position-fixed="false" data-display="reveal">  
-      <ul data-role="listview" class="nav-search">
-      	 <li>Menu</li>
-        <li><a href="#home" class="ui-btn">Home</a></li>
-        <li><a href="#about" class="ui-btn">About</a></li>
-        <li><a href="#products" class="ui-btn">Products</a></li>
-        <li><a href="#services" class="ui-btn">Services</a></li>
-        <li><a href="#contact" class="ui-btn">Contact</a></li>
-      </ul>   
-    </div> 
-  
     <div data-role="header" data-position="fixed">
       <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
-      <a href="#myPanel8" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
       <a href="#" data-rel="back" data-theme="b" data-icon="back" data-iconpos="notext"></a>
     </div>
   
