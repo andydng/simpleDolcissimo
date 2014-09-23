@@ -107,11 +107,15 @@ td{
 	text-align:center;
 }
 
+
 /* Large screens */
-@media all and (min-width: 800px) {
-  #homeContent{
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
+@media all and (min-width: 600px) { /*Between max screen size and 600*/
+  .ui-header > .ui-btn {display:none;} /*Hide hamburger tab*/
+  .littlenav {
+    display: none;
   }
+
+}
+@media (max-width: 599px) and (min-width: 260px) {
+  .bignav {display:none;} /*Hide big nav*/
 }
