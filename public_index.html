@@ -3,32 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Dolcissimo Bakery</title>
-
+	<title>Dolcissimo</title>
 	<link rel="stylesheet" href="themes/dolcissimo.min.css" />
 	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
-  <link rel="stylesheet" href="themes/styles.css" />
-  <link rel="stylesheet" href="photoswipe/photoswipe.css" />
-
-  <script src="photoswipe/klass.min.js"></script>
-  <script src="photoswipe/code.photoswipe.jquery-3.0.4.min.js"></script>
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
-
-  <!--Photoswipe!-->
-  <script type="text/javascript">
-    (function(window, $, PhotoSwipe){
-      $(document).ready(function(){
-        $(".gallery a").photoSwipe({
-          enableMouseWheel: false,
-          enableKeyboard: false
-        });
-      });
-    }(window, window.jQuery, window.Code.PhotoSwipe));
-  </script>
-
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
   <!--Needed for internal mypanel-->
   <script type="text/javascript">
     $( document ).ready(function() {
@@ -37,9 +17,25 @@
       });
     });
   </script>
-
+  <!--Photoswipe!-->
+  <link rel="stylesheet" href="photoswipe/photoswipe.css" />
+  <script src="photoswipe/klass.min.js"></script>
+  <script src="photoswipe/code.photoswipe.jquery-3.0.4.min.js"></script>
+  <script type="text/javascript">
+    (function(window, $, PhotoSwipe)
+    {
+    $(document).ready(function()
+    {
+     $(".gallery a").photoSwipe(
+     {
+      enableMouseWheel: false,
+      enableKeyboard: false
+     });
+    });
+    }(window, window.jQuery, window.Code.PhotoSwipe));
+</script>
+  <link rel="stylesheet" href="themes/styles.css" />
 </head>
-
 <body>
   <div data-role="panel" id="mypanel" data-position="left" data-position-fixed="false" data-display="reveal" data-theme="a">  
     <ul data-role="listview" class="nav-search">
