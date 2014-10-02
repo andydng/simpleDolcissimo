@@ -106,14 +106,111 @@ td{
 .gallery{
 	text-align:center;
 }
+h1 img {
+  max-height: 83px;
+  margin-top: -15px;
+  border:none;
+}
+.ui-header, .ui-title {
+  min-height: 2em;
+  border:none;
+}
+.bignav {
+  max-width: 800px;
+  border-top: solid 2px #1cbbb4;
+  border-bottom: solid 2px #1cbbb4;
+  margin: 2% auto;
+  
+}
+.bignav ul{
+  list-style:none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.bignav li {
+  font-size: 1.2em;
+  line-height: 40px;
+  display: inline-block;
+  text-align: center;
+  width: 19%;
+}
+.bignav a{
+  text-decoration: none;
+  color: #1cbbb4;
+  display: block;
+  font-family: sans-serif;
+}
+.current a {
+  background: #1cbbb4;
+  color: #fff;
+}
+.bignav a:hover{
+  background: #1cbbb4;
+  color: #fff;
+}
+.center img{
+  margin: 0 auto;
+}
+#imgback{
+	margin: 0 auto;
+	padding: 0;
+}
+#imgback img{
+  margin: 0 auto;
+  display:block;
+}
+#picfoot{
+	background-color: rgb(28, 187, 180);
+	max-width: 800px;
+	margin: 0 auto;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	color: white;
+  text-align:center;
+}
+/*Canvas*/
+#container{
+  background-color:white;
+  max-width: 800px;
+    height: 300px;
+    overflow: hidden;
+}
 
+#slider{
+posistion:relative;  
+width:90%;
+top:20px;  
+left:25px;
+}
+
+.ui-slider .ui-slider-handle { 
+  width: 40px !important; 
+  margin-left: -20px !important; 
+  height:40px !important; 
+}
+/*Canvas*/
 @media all and (min-width: 1001px) { /*Desktop view size*/
   .ui-header > .ui-btn {display:none;} /*Hide hamburger tab*/
   .littlenav {display: none;}
-  .bignav {
-    width: 500px;
+  .ui-page-theme-a, .ui-bar-inherit {
+    background-color: #ffffff !important;
   }
-  
+  .ui-header .ui-title {
+    margin: 0;
+    padding: 15px;
+    float:left;
+  }
+  .bignav {
+    float:right;
+    width:550px;
+  }
+  .bignav li{
+    width:19%;
+  }
+  #imgback {
+    padding-top: 30px;
+  }
 }
 
 /* Tablet screens */
@@ -122,7 +219,9 @@ td{
   .littlenav {
     display: none;
   }
-  
+  .ui-page-theme-a, .ui-bar-inherit {
+    background-color: #ffffff !important;
+  }
 }
 @media (max-width: 599px) and (min-width: 260px) {
   .bignav {display:none;} /*Hide big nav*/

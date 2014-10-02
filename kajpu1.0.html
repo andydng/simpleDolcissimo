@@ -1,0 +1,172 @@
+<html><head>
+
+  <meta charset="UTF-8">
+
+  <!--
+Copyright (c) 2014 by GreenSock (http://codepen.io/GreenSock/pen/Kajpu)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+  <title>GSAP JS Bezier: Disperse and Converge - CodePen</title>
+
+  <link rel="stylesheet" href="http://codepen.io/assets/libs/fullpage/jquery-ui.css">
+
+  <style>body{
+  background-color:#333;
+  margin:0;
+}
+
+#container{
+  background-color:white;
+}
+
+#slider{
+posistion:relative;  
+width:90%;
+top:20px;  
+left:25px;
+display:none;
+}
+
+.ui-slider .ui-slider-handle { 
+  width: 40px !important; 
+  margin-left: -20px !important; 
+  height:40px !important; 
+  margin-top:-10px !important;
+  display:none;
+}
+
+
+</style>
+
+  <script>
+    window.open    = function(){};
+    window.print   = function(){};
+    // Support hover state for mobile.
+    if (false) {
+      window.ontouchstart = function(){};
+    }
+  </script><style type="text/css"></style>
+
+</head>
+
+<body>
+
+<div id="container"></div>
+<div id="slider"></div>
+
+  <script src="http://assets.codepen.io/assets/libs/fullpage/jquery_and_jqueryui-f854fb17d00ce0affeccceb6506e478e.js"></script>
+  <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.2.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/TweenMax.min.js"></script>
+
+
+  <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage('resize', "*");
+    }
+  </script>
+
+  <script>
+    /*
+GSAP JS Demo
+http://www.greensock.com/gsap-js/
+Animation and Bezier motion: 
+http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.2/TweenMax.min.js
+
+Canvas help provided by KineticJS: 
+http://cdnjs.cloudflare.com/ajax/libs/kineticjs/4.3.1/kinetic.min.js
+
+Best in Chrome / Safari
+*/
+
+var appHeight = $(window).height(),
+    appWidth = $(window).width(),
+    appCenterX = appWidth/2,
+    appCenterY = appHeight/2,
+    stage = new Kinetic.Stage({
+       container: 'container',
+       width: appWidth,
+       height:appHeight
+     }),
+    layer = new Kinetic.Layer(),
+    bugFile = new Image(),
+    tl;
+
+stage.add(layer);
+bugFile.src = "cakepop1.png";
+
+function getAnimation() {
+  var creature = new Kinetic.Image({
+    image: bugFile,
+    width:27,
+    height:29,
+    x:-50
+  });
+
+  //bezier magic provided by GSAP BezierPlugin (included with TweenMax)
+  //http://api.greensock.com/js/com/greensock/plugins/BezierPlugin.html
+  //Second parameter is speed of TweenMax
+  var bezTween = new TweenMax(creature, 9, { 
+    bezier:{
+      type:"soft", 
+      values:[{setX:150, setY:500}, {setX:300, setY:-10}, {setX:500 + Math.random() *100, setY:320*Math.random() + 50}, {setX:650, setY:320*Math.random() + 50}, {setX:900, setY:-80}, {setX:1150, setY:320*Math.random()+50}, {setX:1300, setY:-50}], 
+      //autoRotate needs to know how to adjust x/y/rotation so we pass in the names of the apporpriate KineticJS methods
+autoRotate:["setX","setY","setRotationDeg"]
+    }, 
+    ease:Linear.easeNone, autoCSS:false});
+
+  layer.add(creature); 
+
+  return bezTween;
+
+}
+
+//create a bunch of Bezier tweens and add them to a timeline
+function buildTimeline() {
+  tl = new TimelineMax({repeat:3, onUpdate:updateSlider, delay:1});
+  for (i = 0 ; i< 5; i++){ //was 30
+    //start creature animation every 0.12 seconds
+  tl.add(getAnimation(), i * 0.5); //was 0.17
+  }
+}
+
+function redraw(){
+  layer.draw();
+}
+
+$("#slider").slider({
+  range: false,
+  min: 0,
+  max: 100,
+  step:.1,
+  slide: function ( event, ui ) {
+    tl.pause();
+    //adjust the timeline's progress() based on slider value
+    tl.progress( ui.value/100 );
+    }
+});	
+
+function updateSlider() {
+  $("#slider").slider("value", tl.progress() *100);
+} 		
+
+$("#slider, .ui-slider-handle").mousedown(function() {
+  $('html, #slider, .ui-slider-handle').one("mouseup", function(e){
+    tl.resume();
+  });
+});
+
+//redraw layer each time a tick event fires
+TweenLite.ticker.addEventListener("tick", redraw);
+buildTimeline();
+    //@ sourceURL=pen.js
+  </script>
+
+
+
+
+</body></html>

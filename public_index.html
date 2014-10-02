@@ -36,8 +36,19 @@
     }(window, window.jQuery, window.Code.PhotoSwipe));
 </script>
   <link rel="stylesheet" href="themes/styles.css" />
+  <link rel="stylesheet" href="http://codepen.io/assets/libs/fullpage/jquery-ui.css">
+  <script src="js/scripts.js"></script>
+  <script>
+    window.open    = function(){};
+    window.print   = function(){};
+    // Support hover state for mobile.
+    if (false) {
+      window.ontouchstart = function(){};
+    }
+  </script>
 </head>
 <body>
+  
   <div data-role="panel" id="mypanel" data-position="left" data-position-fixed="false" data-display="reveal" data-theme="a">  
     <ul data-role="listview" class="nav-search">
        <li>Menu</li>
@@ -51,11 +62,12 @@
   <!--HOME PAGE-->
   <div data-role="page" data-theme="a" id="home">
     <div data-role="header" data-position="fixed" >
-      <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>    
+      <h1><img src="img/logo2.png" alt="logo" class="logo"/></h1>    
       <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a>
-      <div class="bignav" data-role="navbar" data-theme="a">
+      
+      <div class="bignav" data-theme="a">
         <ul>
-          <li><a href="#home" >Home</a></li>
+          <li class="current"><a href="#home" >Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#products">Products</a></li>
           <li><a href="#services">Services</a></li>
@@ -64,14 +76,115 @@
       </div>
     </div>
     <div data-role="content" data-theme="a" class="ui-content" id="homeContent">
-      <img src="img/home2.jpg" alt="Cake Slice"/>
+      
+      <div id="imgback">
+        <img src="img/home2.jpg" alt="Cake Slice"/>
+    		<div id="picfoot">COME VISIT US AT: 5492 Universal Boulevard, Orlando FL, 32813</div>
+      </div>
       <h2>Welcome to Dolcissimo Bakery!</h2>
       <div class="margin-content">	
-        <p>Here at Dolcissimo everything is made from scratch and our number one priority is excellence in food quality and service quality. Take a look around and come visit us soon for a sweet experience.</p>
+        <p class="inner">Here at Dolcissimo everything is made from scratch and our number one priority is excellence in food quality and service quality. Take a look around and come visit us soon for a sweet experience.</p>
         <div class="littlenav">
           <a href="#products" data-role="button" data-theme="a">Products</a>
           <a href="#services" data-role="button" data-theme="a">Services</a>
           <a href="#contact" data-role="button" data-theme="a">Contact</a>
+        </div>
+        <!--animation-->
+        <div class="canvasgoods">
+          <div id="container"></div>
+          <div id="slider"></div>
+          <script src="http://assets.codepen.io/assets/libs/fullpage/jquery_and_jqueryui-f854fb17d00ce0affeccceb6506e478e.js"></script>
+          <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.2.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/TweenMax.min.js"></script>
+
+
+          <script>
+            if (document.location.search.match(/type=embed/gi)) {
+              window.parent.postMessage('resize', "*");
+            }
+          </script>
+          <script>
+            var appHeight = $(window).height(),
+            appWidth = $(window).width(),
+            appCenterX = appWidth/2,
+            appCenterY = appHeight/2,
+            stage = new Kinetic.Stage({
+               container: 'container',
+               width: appWidth,
+               height:appHeight
+             }),
+            layer = new Kinetic.Layer(),
+            bugFile = new Image(),
+            tl;
+
+        stage.add(layer);
+        bugFile.src = "cakepop1.png";
+
+        function getAnimation() {
+          var creature = new Kinetic.Image({
+            image: bugFile,
+            width:27,
+            height:29,
+            x:-50
+          });
+
+          //bezier magic provided by GSAP BezierPlugin (included with TweenMax)
+          //http://api.greensock.com/js/com/greensock/plugins/BezierPlugin.html
+          //Second parameter is speed of TweenMax
+          var bezTween = new TweenMax(creature, 9, { 
+            bezier:{
+              type:"soft", 
+              values:[{setX:150, setY:500}, {setX:300, setY:-10}, {setX:500 + Math.random() *100, setY:320*Math.random() + 50}, {setX:650, setY:320*Math.random() + 50}, {setX:900, setY:-80}], 
+              //autoRotate needs to know how to adjust x/y/rotation so we pass in the names of the apporpriate KineticJS methods
+        autoRotate:["setX","setY","setRotationDeg"]
+            }, 
+            ease:Linear.easeNone, autoCSS:false});
+
+          layer.add(creature); 
+
+          return bezTween;
+
+        }
+
+        //create a bunch of Bezier tweens and add them to a timeline
+        function buildTimeline() {
+          tl = new TimelineMax({repeat:3, onUpdate:updateSlider, delay:1});
+          for (i = 0 ; i< 5; i++){ //was 30
+            //start creature animation every 0.12 seconds
+          tl.add(getAnimation(), i * 0.5); //was 0.17
+          }
+        }
+
+        function redraw(){
+          layer.draw();
+        }
+
+        $("#slider").slider({
+          range: false,
+          min: 0,
+          max: 100,
+          step:.1,
+          slide: function ( event, ui ) {
+            tl.pause();
+            //adjust the timeline's progress() based on slider value
+            tl.progress( ui.value/100 );
+            }
+        });	
+
+        function updateSlider() {
+          $("#slider").slider("value", tl.progress() *100);
+        } 		
+
+        $("#slider, .ui-slider-handle").mousedown(function() {
+          $('html, #slider, .ui-slider-handle').one("mouseup", function(e){
+            tl.resume();
+          });
+        });
+
+        //redraw layer each time a tick event fires
+        TweenLite.ticker.addEventListener("tick", redraw);
+        buildTimeline();
+    //@ sourceURL=pen.js
+          </script>
         </div>
       </div>  
     </div>
@@ -88,8 +201,17 @@
   <!--ABOUT PAGE-->
   <div data-role="page" data-theme="a" id="about">
     <div data-role="header" data-position="fixed" >
-      <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
+      <h1><img src="img/logo2.png" alt="logo" class="logo"/></h1>
       <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <div class="bignav" data-theme="a">
+        <ul>
+          <li><a href="#home" >Home</a></li>
+          <li class="current"><a href="#about">About</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="aboutContent">
@@ -113,8 +235,17 @@
   <!--PRODUCTS PAGE-->
   <div data-role="page" data-theme="a" id="products">
     <div data-role="header" data-position="fixed" >
-      <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
+      <h1><img src="img/logo2.png" alt="logo" class="logo"/></h1>
       <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <div class="bignav" data-theme="a">
+        <ul>
+          <li><a href="#home" >Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li class="current"><a href="#products">Products</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="productsContent">
@@ -141,8 +272,17 @@
   <!--SERVICES PAGE-->
   <div data-role="page" data-theme="a" id="services">
     <div data-role="header" data-position="fixed" >
-      <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
+      <h1><img src="img/logo2.png" alt="logo" class="logo"/></h1>
       <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <div class="bignav" data-theme="a">
+        <ul>
+          <li><a href="#home" >Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#products">Products</a></li>
+          <li class="current"><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="servicesContent">
@@ -172,8 +312,17 @@
   <!--CONTACT PAGE-->
   <div data-role="page" data-theme="a" id="contact">
     <div data-role="header" data-position="fixed" >
-      <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
+      <h1><img src="img/logo2.png" alt="logo" class="logo"/></h1>
       <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
+      <div class="bignav" data-theme="a">
+        <ul>
+          <li><a href="#home" >Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#services">Services</a></li>
+          <li class="current"><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="contactContent">
@@ -237,9 +386,18 @@
   <!--CAKES PAGE-->
   <div data-role="page" data-theme="a" id="cakes">
     <div data-role="header" data-position="fixed">
-      <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
+      <h1><img src="img/logo2.png" alt="logo" class="logo"/></h1>
       <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
       <a href="#" data-rel="back" data-theme="b" data-icon="back" data-iconpos="notext"></a>
+      <div class="bignav" data-theme="a">
+        <ul>
+          <li class="current"><a href="#home" >Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="cakesContent">
@@ -267,9 +425,18 @@
   <!--CUPCAKES PAGE-->
   <div data-role="page" data-theme="a" id="cupcakes">
     <div data-role="header" data-position="fixed">
-      <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
+      <h1><img src="img/logo2.png" alt="logo" class="logo"/></h1>
       <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
       <a href="#" data-rel="back" data-theme="b" data-icon="back" data-iconpos="notext"></a>
+      <div class="bignav" data-theme="a">
+        <ul>
+          <li class="current"><a href="#home" >Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="cupcakesContent">
@@ -297,9 +464,18 @@
   <!--PASTRIES PAGE-->
   <div data-role="page" data-theme="a" id="pastries">
     <div data-role="header" data-position="fixed">
-      <h1><img src="img/logo.png" alt="logo" class="logo"/></h1>
+      <h1><img src="img/logo2.png" alt="logo" class="logo"/></h1>
       <a href="#mypanel" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b">Bars</a> 
       <a href="#" data-rel="back" data-theme="b" data-icon="back" data-iconpos="notext"></a>
+      <div class="bignav" data-theme="a">
+        <ul>
+          <li class="current"><a href="#home" >Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
   
     <div data-role="content" data-theme="a" class="ui-content" id="pastriesContent">
