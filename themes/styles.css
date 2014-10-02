@@ -107,14 +107,22 @@ td{
 	text-align:center;
 }
 
+@media all and (min-width: 1001px) { /*Desktop view size*/
+  .ui-header > .ui-btn {display:none;} /*Hide hamburger tab*/
+  .littlenav {display: none;}
+  .bignav {
+    width: 500px;
+  }
+  
+}
 
-/* Large screens */
-@media all and (min-width: 600px) { /*Between max screen size and 600*/
+/* Tablet screens */
+@media (max-width: 1000px) and (min-width: 600px) { /*Between max screen size and 600*/
   .ui-header > .ui-btn {display:none;} /*Hide hamburger tab*/
   .littlenav {
     display: none;
   }
-
+  
 }
 @media (max-width: 599px) and (min-width: 260px) {
   .bignav {display:none;} /*Hide big nav*/
